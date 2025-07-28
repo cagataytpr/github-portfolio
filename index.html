@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="./style/style.css" />
+  <link rel="stylesheet" href="./style/mediaqueries.css" />
+</head>
+
+<body>
+  <nav id="desktop-nav">
+    <div class="logo">Çağatay Tupur</div>
+    <div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="" onclick="window.open('./assets/CV.pdf')">Download CV</a></li>
+      </ul>
+    </div>
+  </nav>
+  <nav id="hamburger-nav">
+    <div class="logo">Çağatay Tupur</div>
+    <div class="hamburger-menu">
+      <div class="hamburger-icon" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="menu-links">
+        <li><a href="#about" onclick="toggleMenu()">About</a></li>
+        <li><a href="#experience" onclick="toggleMenu()">Experience</a></li>
+        <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+        <li><a href="" onclick="window.open('./assets/CV.pdf')">Download CV</a></li>
+      </div>
+    </div>
+  </nav>
+  <section id="profile">
+    <div class="section__pic-container">
+      <img src="./assets/profile-pic.png" alt="John Doe profile picture" />
+    </div>
+    <div class="section__text">
+      <p class="section__text__p1">Hello, I'm</p>
+      <h1 class="title">Çağatay Tupur</h1>
+      <p class="section__text__p2">Mobile & Web Developer</p>
+      <div class="btn-container">
+         <!--<button class="btn btn-color-1" onclick="toggleMenu(
+          location.href='./swift_apps.html')">
+          Swift Apps
+        </button> -->
+        <button class="btn btn-color-1" onclick="toggleMenu(
+          location.href='./flutter_apps.html')">
+          My Apps
+        </button>
+        
+         <!--<button class="btn btn-color-1" onclick="toggleMenu(
+          location.href='./games.html')">
+          Games
+        </button> -->
+      </div>
+      <div id="socials-container">
+        <img src="./assets/linkedin.png" alt="My LinkedIn profile" class="icon"
+          onclick="location.href='https://www.linkedin.com/in/çağatay-tupur-724927294/'" />
+        <img src="./assets/github.png" alt="My Github profile" class="icon"
+          onclick="location.href='https://github.com/cagataytpr'" />
+      </div>
+    </div>
+  </section>
+  <section id="about">
+    <p class="section__text__p1">Get To Know More</p>
+    <h1 class="title">About Me</h1>
+    <div class="section-container">
+
+      <div class="about-details-container">
+        <div class="about-containers">
+          <div class="details-container">
+            <img src="./assets/education.png" alt="Education icon" class="icon" />
+            <h3>Education</h3>
+            <p>Uludağ University - Computer Programming</p>
+          </div>
+        </div>
+        <div class="text-container">
+          <p>
+            My name is Çağatay Tupur. I studied Computer Programming at Uludağ University. During my studies, I worked on various academic projects using technologies such as Flutter for mobile app development, .NET Core for web applications, and programming languages like Java and C#.
+
+I’m passionate about software development and always eager to learn and improve. I’ve developed school-wide projects that allowed me to gain hands-on experience in both mobile and web development. I enjoy problem-solving, clean coding practices, and staying up-to-date with the latest technologies.
+
+I consider myself a responsible and detail-oriented person who works well both independently and within a team. I’m open to feedback and believe that continuous learning and collaboration are essential for growth in the tech industry.
+
+I'm currently focused on improving my skills and working on real-world projects to expand my portfolio. You’re welcome to explore my work and reach out for collaboration or networking opportunities.
+          </p>
+        </div>
+      </div>
+    </div>
+    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#experience'" />
+  </section>
+  <section id="experience">
+    <p class="section__text__p1">Explore My</p>
+    <h1 class="title">Experience</h1>
+    <div class="experience-details-container">
+      <div class="about-containers">
+        <div class="details-container">
+          <h2 class="experience-sub-title">SCHOTT</h2>
+          <p>IT Intern</p>
+          <br />
+          <div class="article-container">
+            <div class="about-details-container">
+              <div class="text-container">
+                <p style="text-align: center;">
+                  During my 1.5-month internship at SCHOTT AG, I worked as part of the IT support team, assisting in resolving daily technical issues, installing essential software, and managing the company-wide upgrade to Windows 11. I provided hands-on support for hardware and network-related problems, addressed compatibility issues, and helped optimize system performance across multiple devices.
+
+Alongside my core responsibilities, I took the initiative to improve my skills in Flutter. I studied and applied concepts such as widget structures (Scaffold, SizedBox, ListView), state management with Provider, Firebase integration, RESTful APIs, and local storage. Through practical demo projects, I strengthened my foundation in mobile app development. This internship not only improved my problem-solving and technical support abilities but also gave me the opportunity to grow as a Flutter developer in a real-world environment.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        </div>
+      </div>
+    </div>
+    <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#projects'" />
+  </section>
+  <section id="contact">
+    <p class="section__text__p1">Get in Touch</p>
+    <h1 class="title">Contact Me</h1>
+    <div class="contact-info-upper-container">
+      <div class="contact-info-container">
+        <img src="./assets/email.png" alt="Email icon" class="icon contact-icon email-icon" />
+        <p><a href="mailto:cagataytupur@gmail.com">cagataytupur@gmail.com</a></p>
+      </div>
+      <div class="contact-info-container">
+        <img src="./assets/linkedin.png" alt="LinkedIn icon" class="icon contact-icon" />
+        <p><a href="https://www.linkedin.com/in/%C3%A7a%C4%9Fatay-tupur-724927294/">LinkedIn</a></p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <nav>
+      <div class="nav-links-container">
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+        </ul>
+      </div>
+    </nav>
+  </footer>
+  <script src="./scripts/script.js"></script>
+</body>
+
+</html>
