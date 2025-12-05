@@ -328,22 +328,19 @@ section {
 
 /* EXPERIENCE SECTION */
 
+/* İKİ AYRI BLOĞU TEK VE SADE BİR BLOKTA BİRLEŞTİRDİM */
 .experience-sub-title {
+  /* Bu renk tercihlerinizi korur ve daha temizdir */
   color: #ffffff !important;
+  font-weight: 600;
   font-size: 1.75rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 #experience {
   position: relative;
 }
 
-.experience-sub-title {
-  color: #2c2c2c;
-  font-weight: 600;
-  font-size: 1.75rem;
-  margin-bottom: 2rem;
-}
 
 .experience-details-container {
   display: flex;
