@@ -337,14 +337,6 @@ section {
 #experience {
   position: relative;
 }
-
-.experience-sub-title {
-  color: #2c2c2c;
-  font-weight: 600;
-  font-size: 1.75rem;
-  margin-bottom: 2rem;
-}
-
 .experience-details-container {
   display: flex;
   color: #1f1f1f;
