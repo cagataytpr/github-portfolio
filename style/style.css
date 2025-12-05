@@ -328,9 +328,8 @@ section {
 
 /* EXPERIENCE SECTION */
 
-/* İKİ AYRI BLOĞU TEK VE SADE BİR BLOKTA BİRLEŞTİRDİM */
 .experience-sub-title {
-  /* Bu renk tercihlerinizi korur ve daha temizdir */
+  /* Tek ve sade blok: Buton yazısı hatasını engellemek için bu hali korundu. */
   color: #ffffff !important;
   font-weight: 600;
   font-size: 1.75rem;
@@ -451,5 +450,5 @@ footer {
 
 footer p {
   text-align: center;
-  color: #2c2c2c;
+  color: #e0e0e0; /* Düzeltildi: Koyu arka planda okunsun diye rengi açıldı. */
 }
