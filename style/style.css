@@ -238,7 +238,8 @@ section {
 
 .btn-color-1,
 .btn-color-2 {
-  border: #ffffff 0.1rem solid;
+  background: #ffffff;
+  color: #191970;
 }
 
 .btn-color-1:hover,
