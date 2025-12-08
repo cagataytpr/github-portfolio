@@ -249,6 +249,7 @@ section {
 
 .btn-color-1,
 .btn-color-2:hover {
+  /* Bu blok butona rengini veriyor. */
   background: #ffffff;
   color: #191970;
 }
@@ -329,7 +330,6 @@ section {
 /* EXPERIENCE SECTION */
 
 .experience-sub-title {
-  /* Tek ve sade blok: Buton yazısı hatasını engellemek için bu hali korundu. */
   color: #ffffff !important;
   font-weight: 600;
   font-size: 1.75rem;
