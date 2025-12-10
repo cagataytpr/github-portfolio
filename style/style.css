@@ -462,3 +462,22 @@ footer p {
   text-align: center;
   color: #e0e0e0; /* Düzeltildi: Koyu arka planda okunsun diye rengi açıldı. */
 }
+
+/* FİLTER BUTTON STYLES */
+.filter-btn-container {
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.filter-btn {
+    width: auto !important; /* Butonların genişliğini metnine göre ayarla */
+    padding: 0.5rem 1rem !important; /* Dikey boşluğu azalt */
+    font-size: 1rem !important;
+}
+
+/* Aktif filtrenin beyaz ve koyu yazılı görünmesini sağlar */
+.active-filter {
+    background: #ffffff !important;
+    color: #191970 !important;
+    border-color: #ffffff !important;
+}

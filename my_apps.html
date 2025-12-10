@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./style/mediaqueries.css" />
 </head>
 
-<body>
+<body onload="filterProjects('all')">
     <nav id="desktop-nav">
         <div class="logo"><a href="./index.html">Çağatay Tupur</a></div>
         <div>
@@ -42,9 +42,17 @@
     <section id="projects">
         <p class="section__text__p1">Mobil & Web Uygulamaları</p>
         <h1 class="title">Projeler</h1>
+
+        <div class="btn-container filter-btn-container"> 
+            <button class="btn btn-color-2 project-btn filter-btn active-filter" onclick="filterProjects('all')">All</button>
+            <button class="btn btn-color-2 project-btn filter-btn" onclick="filterProjects('flutter')">Flutter</button>
+            <button class="btn btn-color-2 project-btn filter-btn" onclick="filterProjects('java')">Java</button>
+        </div>
+        
         <div class="experience-details-container">
             <div class="about-containers">
-                <div class="details-container color-container">
+                
+                <div class="details-container color-container category-flutter">
                     <div class="article-container">
                         <img src="./assets/ykspuan.png" alt="YKS Puan Hesaplama Projesi" class="project-img" />
                     </div>
@@ -56,7 +64,8 @@
                         </button>
                     </div>
                 </div>
-                <div class="details-container color-container">
+
+                <div class="details-container color-container category-java">
                     <div class="article-container">
                         <img src="./assets/starbucks.png" alt="Car Race Game Java" class="project-img" />
                     </div>
@@ -68,7 +77,8 @@
                         </button>
                     </div>
                 </div>
-                <div class="details-container color-container">
+
+                <div class="details-container color-container category-flutter">
                     <div class="article-container">
                         <img src="./assets/intro.png" alt="To Do App Flutter" class="project-img" />
                     </div>
@@ -80,6 +90,7 @@
                         </button>
                     </div>
                 </div>
+                
             </div>
         </div>
         </div>
