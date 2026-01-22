@@ -28,7 +28,7 @@ function filterProjects(category) {
     document.querySelector(`[onclick="filterProjects('${category}')"]`).classList.add('active-filter');
 }
 
-// Vaulty Lightbox Functions
+// Lightbox Logic
 function openModal(imgSrc) {
     const modal = document.getElementById("imageModal");
     const modalImg = document.getElementById("img01");
@@ -38,10 +38,7 @@ function openModal(imgSrc) {
 function closeModal() {
     document.getElementById("imageModal").style.display = "none";
 }
-// Close modal when clicking outside the image
 window.onclick = function (event) {
     const modal = document.getElementById("imageModal");
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
+    if (event.target == modal) { closeModal(); }
 }
