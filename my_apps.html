@@ -43,15 +43,43 @@
         <p class="section__text__p1">My Apps</p>
         <h1 class="title">My Projects</h1>
 
-        <div class="btn-container filter-btn-container"> 
-            <button class="btn btn-color-2 project-btn filter-btn active-filter" onclick="filterProjects('all')">All</button>
+        <div class="btn-container filter-btn-container">
+            <button class="btn btn-color-2 project-btn filter-btn active-filter"
+                onclick="filterProjects('all')">All</button>
             <button class="btn btn-color-2 project-btn filter-btn" onclick="filterProjects('flutter')">Flutter</button>
             <button class="btn btn-color-2 project-btn filter-btn" onclick="filterProjects('java')">Java</button>
         </div>
-        
+
         <div class="experience-details-container">
             <div class="about-containers">
-                
+                <div class="details-container color-container category-flutter">
+                    <div class="article-container">
+                        <img src="./assets/vaulty.png" alt="Vaulty - Secure Password Manager" class="project-img" />
+                    </div>
+                    <h2 class="experience-sub-title project-title">Vaulty - Secure Password Manager</h2>
+                    <div style="padding: 0 15px; margin-bottom: 1.5rem;">
+                        <p style="font-size: 0.9rem; color: #e0e0e0; text-align: justify; line-height: 1.6;">
+                            A robust, offline-first password manager built with <strong>Flutter</strong>, designed
+                            around the <strong>Zero-Knowledge</strong> principle.
+                            I implemented military-grade <strong>AES-256 encryption</strong> and <strong>PBKDF2</strong>
+                            key derivation to ensure user data remains unreadable to anyone but the owner.
+                        </p>
+                        <p
+                            style="font-size: 0.9rem; color: #e0e0e0; text-align: justify; margin-top: 10px; line-height: 1.6;">
+                            To maintain a smooth user experience, I utilized <strong>Flutter Isolates</strong> (compute)
+                            to offload heavy cryptographic calculations to background threads.
+                            The app also features <strong>Biometric Authentication</strong> and auto-lock mechanisms,
+                            reflecting a strong focus on mobile security best practices.
+                        </p>
+                    </div>
+                    <div class="btn-container">
+                        <button class="btn btn-color-2 project-btn"
+                            onclick="location.href='https://github.com/cagataytpr/vaulty'">
+                            Github
+                        </button>
+                    </div>
+                </div>
+
                 <div class="details-container color-container category-flutter">
                     <div class="article-container">
                         <img src="./assets/ykspuan.png" alt="YKS Puan Hesaplama Projesi" class="project-img" />
@@ -90,7 +118,7 @@
                         </button>
                     </div>
                 </div>
-                
+
             </div>
         </div>
         </div>
