@@ -66,8 +66,8 @@
                     </div>
 
                     <div class="article-container" style="justify-content: center;">
-                        <img src="./assets/vaulty_full.png" alt="Vaulty Showcase" class="project-img"
-                            style="max-height: 400px; width: auto; object-fit: contain; border-radius: 1.5rem;" />
+                        <img src="./assets/vaulty_full.png" alt="Vaulty Showcase Click to Enlarge"
+                            class="project-img vaulty-thumbnail" onclick="openModal(this.src)" />
                     </div>
 
                 </div>
@@ -135,6 +135,10 @@
             </div>
         </div>
     </section>
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="img01">
+    </div>
     <script src="./scripts/script.js"></script>
 </body>
 
