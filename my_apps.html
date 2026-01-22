@@ -52,36 +52,37 @@
 
         <div class="experience-details-container">
             <div class="about-containers">
-                <div class="details-container color-container category-flutter">
-                    <div class="article-container">
-                        <div class="project-gallery">
-                            <img src="./assets/vaulty_1.png" alt="Onboarding" class="gallery-img" />
-                            <img src="./assets/vaulty_2.png" alt="Login" class="gallery-img" />
-                            <img src="./assets/vaulty_3.png" alt="Vault" class="gallery-img" />
-                        </div>
-                    </div>
-                    <h2 class="experience-sub-title project-title">Vaulty - Secure Password Manager</h2>
-                    <div style="padding: 0 15px; margin-bottom: 1.5rem;">
-                        <p style="font-size: 0.9rem; color: #e0e0e0; text-align: justify; line-height: 1.6;">
-                            A robust, offline-first password manager built with <strong>Flutter</strong>, designed
-                            around the <strong>Zero-Knowledge</strong> principle.
-                            I implemented military-grade <strong>AES-256 encryption</strong> and <strong>PBKDF2</strong>
-                            key derivation to ensure user data remains unreadable to anyone but the owner.
-                        </p>
-                        <p
-                            style="font-size: 0.9rem; color: #e0e0e0; text-align: justify; margin-top: 10px; line-height: 1.6;">
-                            To maintain a smooth user experience, I utilized <strong>Flutter Isolates</strong> (compute)
-                            to offload heavy cryptographic calculations to background threads.
-                            The app also features <strong>Biometric Authentication</strong> and auto-lock mechanisms,
-                            reflecting a strong focus on mobile security best practices.
+                <div class="details-container color-container category-flutter"
+                    style="flex-direction: column; gap: 10px;">
+
+                    <h2 class="experience-sub-title project-title" style="margin-bottom: 0.5rem;">Vaulty - Secure
+                        Password Manager</h2>
+
+                    <div style="padding: 0 10px; margin-bottom: 1rem;">
+                        <p style="font-size: 0.9rem; color: #e0e0e0; text-align: center; line-height: 1.6;">
+                            A robust, offline-first password manager built with <strong>Flutter</strong>.
+                            Features military-grade <strong>AES-256 encryption</strong>, <strong>Zero-Knowledge</strong>
+                            architecture,
+                            and <strong>Biometric Authentication</strong> using Dart Isolates for high performance.
                         </p>
                     </div>
-                    <div class="btn-container">
+
+                    <div class="btn-container" style="margin-bottom: 1.5rem;">
                         <button class="btn btn-color-2 project-btn"
                             onclick="location.href='https://github.com/cagataytpr/vaulty'">
                             Github
                         </button>
                     </div>
+
+                    <div class="article-container" style="width: 100%; justify-content: center;">
+                        <div class="project-gallery">
+                            <img src="./assets/vaulty_1.png" alt="Onboarding" class="gallery-img" />
+                            <img src="./assets/vaulty.png" alt="Main Screen" class="gallery-img" />
+                            <img src="./assets/vaulty_3.png" alt="Vault List" class="gallery-img" />
+                            <img src="./assets/vaulty_2.png" alt="Login" class="gallery-img" />
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="details-container color-container category-flutter">
