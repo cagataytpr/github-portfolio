@@ -481,3 +481,33 @@ footer p {
     color: #191970 !important;
     border-color: #ffffff !important;
 }
+
+/* PROJECT GALLERY */
+.project-gallery {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding-bottom: 1rem; /* Space for scrollbar if visible, layout breathing room */
+  margin-bottom: 1rem;
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  -webkit-overflow-scrolling: touch;
+}
+
+.project-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.project-gallery {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.gallery-img {
+  height: 300px;
+  width: auto;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+}
