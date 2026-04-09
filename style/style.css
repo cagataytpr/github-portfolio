@@ -10,9 +10,8 @@
 body {
   font-family: "Poppins", sans-serif;
   background-color: #191970;
-  /* Midnight Blue */
   color: #f5f5f5;
-  /* Off-white text for better contrast */
+  overflow-x: hidden;
 }
 
 html {
@@ -21,14 +20,48 @@ html {
 
 p {
   color: #e0e0e0;
-  /* Light gray for paragraphs */
 }
 
-/* TRANSITION */
+/* BACKGROUND GRADIENT ANIMATION */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    #191970 0%,
+    #1a1a5e 25%,
+    #191970 50%,
+    #12124a 75%,
+    #191970 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  z-index: -1;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* SMOOTH TRANSITIONS */
 
 a,
-.btn {
-  transition: all 300ms ease;
+.btn,
+.icon,
+.profile-img,
+.social-icon,
+.details-container,
+.contact-info-upper-container,
+.contact-info-container,
+.contact-info-container .contact-icon,
+.project-btn {
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* DESKTOP NAV */
@@ -52,21 +85,36 @@ nav {
 
 a {
   color: #ffffff;
-  /* White links */
   text-decoration: none;
   text-decoration-color: #ffffff;
+  position: relative;
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.35s ease;
+}
+
+a:hover::after {
+  width: 100%;
 }
 
 a:hover {
   color: #ffffff;
-  text-decoration: underline;
-  text-underline-offset: 1rem;
-  text-decoration-color: #ffffff;
-  opacity: 0.8;
+  text-decoration: none;
+  opacity: 0.85;
 }
 
 .logo {
   font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 .logo:hover {
@@ -97,8 +145,7 @@ a:hover {
   width: 100%;
   height: 2px;
   background-color: #ffffff;
-  /* White hamburger icon */
-  transition: all 0.3 ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .menu-links {
@@ -106,15 +153,13 @@ a:hover {
   top: 100%;
   right: 0;
   background-color: #191970;
-  /* Match the main background */
   width: 200px;
-  /* Fixed width for better mobile experience */
   max-height: 0;
   overflow: hidden;
-  transition: all 0.3s ease-in-out;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  margin-top: 10px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  margin-top: 15px;
   z-index: 1000;
 }
 
@@ -124,15 +169,14 @@ a:hover {
   text-align: center;
   font-size: 1.2rem;
   color: #ffffff !important;
-  /* Force white color for all states */
   text-decoration: none;
-  transition: all 0.3s ease-in-out;
 }
 
 .menu-links a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.15);
   color: #ffffff !important;
   text-decoration: none;
+  padding-left: 35px;
 }
 
 .menu-links li {
@@ -140,19 +184,21 @@ a:hover {
 }
 
 .menu-links.open {
-  max-height: 300px;
+  max-height: 350px;
+  padding: 10px 0;
 }
 
 .hamburger-icon.open span:first-child {
-  transform: rotate(45deg) translate(10px, 5px);
+  transform: rotate(45deg) translate(10px, 6px);
 }
 
 .hamburger-icon.open span:nth-child(2) {
   opacity: 0;
+  transform: scaleX(0);
 }
 
 .hamburger-icon.open span:last-child {
-  transform: rotate(-45deg) translate(10px, -5px);
+  transform: rotate(-45deg) translate(10px, -6px);
 }
 
 .hamburger-icon span:first-child {
@@ -191,6 +237,16 @@ section {
   margin: auto 0;
 }
 
+.profile-img {
+  border-radius: 50%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.profile-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4), 0 0 60px rgba(255, 255, 255, 0.15);
+}
+
 .section__text {
   align-self: center;
   text-align: center;
@@ -213,7 +269,6 @@ section {
   font-size: 3rem;
   text-align: center;
   color: #ffffff;
-  /* White title */
 }
 
 #socials-container {
@@ -223,11 +278,14 @@ section {
   gap: 1rem;
 }
 
-/* ICONS */
-
 .icon {
   cursor: pointer;
   height: 2rem;
+}
+
+.social-icon:hover {
+  transform: scale(1.25) translateY(-5px);
+  filter: drop-shadow(0 10px 20px rgba(255, 255, 255, 0.3));
 }
 
 /* BUTTONS */
@@ -240,10 +298,29 @@ section {
 
 .btn {
   font-weight: 600;
-  transition: all 300ms ease;
   padding: 1rem;
   width: 8rem;
   border-radius: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+}
+
+.btn:active::after {
+  width: 300px;
+  height: 300px;
 }
 
 .btn-color-1,
@@ -254,12 +331,12 @@ section {
 .btn-color-1:hover,
 .btn-color-2:hover {
   cursor: pointer;
-  opacity: 0.9;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
 }
 
 .btn-color-1,
 .btn-color-2:hover {
-  /* Bu blok butona rengini veriyor. */
   background: #ffffff;
   color: #191970;
 }
@@ -275,11 +352,7 @@ section {
 
 .btn-color-2:hover {
   border: #ffffff 0.1rem solid;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.btn-container {
-  gap: 1rem;
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* ABOUT SECTION */
@@ -295,6 +368,11 @@ section {
   border: rgba(255, 255, 255, 0.1) 0.2rem solid;
   backdrop-filter: blur(10px);
   text-align: initial;
+}
+
+#about .text-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
 .about-containers {
@@ -322,6 +400,17 @@ section {
   position: absolute;
   right: -5rem;
   bottom: 2.5rem;
+  animation: floatArrow 3s ease-in-out infinite;
+}
+
+@keyframes floatArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+.arrow:hover {
+  transform: translateY(12px);
+  animation: none;
 }
 
 .details-container {
@@ -335,15 +424,16 @@ section {
   backdrop-filter: blur(10px);
 }
 
+.details-container:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.12);
+}
+
 .section-container {
   gap: 4rem;
   height: 80%;
-}
-
-.section__pic-container {
-  height: 400px;
-  width: 400px;
-  margin: auto 0;
 }
 
 /* EXPERIENCE SECTION */
@@ -358,7 +448,6 @@ section {
 #experience {
   position: relative;
 }
-
 
 .experience-details-container {
   display: flex;
@@ -418,6 +507,7 @@ article .icon {
 
 .project-btn:hover {
   background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
 }
 
 /* CONTACT */
@@ -440,6 +530,12 @@ article .icon {
   backdrop-filter: blur(10px);
 }
 
+.contact-info-upper-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
 .contact-info-container {
   display: flex;
   align-items: center;
@@ -448,12 +544,20 @@ article .icon {
   margin: 5px;
 }
 
+.contact-info-container:hover {
+  transform: scale(1.05);
+}
+
 .contact-info-container p {
   font-size: larger;
 }
 
 .contact-icon {
   cursor: default;
+}
+
+.contact-info-container:hover .contact-icon {
+  transform: scale(1.1);
 }
 
 .email-icon {
@@ -470,7 +574,6 @@ footer {
 footer p {
   text-align: center;
   color: #e0e0e0;
-  /* Düzeltildi: Koyu arka planda okunsun diye rengi açıldı. */
 }
 
 /* FİLTER BUTTON STYLES */
@@ -481,37 +584,35 @@ footer p {
 
 .filter-btn {
   width: auto !important;
-  /* Butonların genişliğini metnine göre ayarla */
   padding: 0.5rem 1rem !important;
-  /* Dikey boşluğu azalt */
   font-size: 1rem !important;
 }
 
-/* Aktif filtrenin beyaz ve koyu yazılı görünmesini sağlar */
+.filter-btn:hover {
+  transform: translateY(-2px);
+}
+
 .active-filter {
   background: #ffffff !important;
   color: #191970 !important;
   border-color: #ffffff !important;
+  box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
 }
 
-/* --- LIGHTBOX & THUMBNAIL STYLES --- */
+/* LIGHTBOX & THUMBNAIL STYLES */
 .clickable-thumb {
   height: 220px;
-  /* Fixes height to make card smaller */
   width: auto;
-  /* Maintains aspect ratio */
   border-radius: 12px;
   cursor: zoom-in;
-  /* Shows magnifying glass */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s;
   display: block;
   margin: 10px auto 0 auto;
-  /* Centers the image */
 }
 
 .clickable-thumb:hover {
-  transform: scale(1.03);
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
 /* Modal Background */
@@ -533,19 +634,18 @@ footer p {
   max-width: 90%;
   max-height: 90vh;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-  animation: zoom 0.3s;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  animation: zoomModal 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes zoom {
+@keyframes zoomModal {
   from {
-    transform: scale(0.8);
-    opacity: 0
+    transform: scale(0.9);
+    opacity: 0;
   }
-
   to {
     transform: scale(1);
-    opacity: 1
+    opacity: 1;
   }
 }
 
@@ -558,9 +658,33 @@ footer p {
   font-size: 40px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .close:hover {
   color: #bbb;
+  transform: rotate(90deg) scale(1.1);
 }
+
+/* SECTION FADE IN ON SCROLL */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+section {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* STAGGERED DELAY FOR CHILDREN */
+#profile { animation-delay: 0s; }
+#about { animation-delay: 0.1s; }
+#experience { animation-delay: 0.2s; }
+#projects { animation-delay: 0.3s; }
+#contact { animation-delay: 0.4s; }

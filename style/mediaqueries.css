@@ -100,4 +100,20 @@
   .text-container {
     text-align: justify;
   }
+
+  /* MOBILE ANIMATIONS */
+  #profile,
+  section {
+    animation: none;
+    opacity: 1;
+  }
+
+  .section__pic-container,
+  .section__text,
+  .btn-container,
+  #socials-container {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

@@ -5,9 +5,523 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio - Uygulama Projeleri</title>
+    <title>My Portfolio - App Projects</title>
     <link rel="stylesheet" href="./style/style.css" />
     <link rel="stylesheet" href="./style/mediaqueries.css" />
+    <style>
+        /* ===== PROJECT CARDS - Horizontal Layout ===== */
+        /* ===== PROJECT CARDS - Compact Horizontal Layout ===== */
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: row;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            border-color: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .project-card:hover .card-image {
+            transform: scale(1.03);
+        }
+
+        .project-card:hover .card-overlay {
+            opacity: 1;
+        }
+
+        .project-card:hover .view-btn {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .card-image-container {
+            position: relative;
+            overflow: hidden;
+            width: 220px;
+            min-height: 120px;
+            flex-shrink: 0;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.35s ease;
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(25, 25, 112, 0.75), rgba(0, 0, 0, 0.45));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .view-btn {
+            background: #fff;
+            color: #191970;
+            padding: 8px 16px;
+            border-radius: 16px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transform: translateY(12px);
+            opacity: 0;
+            transition: all 0.25s ease 0.05s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .card-content {
+            flex: 1;
+            padding: 1rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .card-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 0.6rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .card-description {
+            display: none;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .card-tech {
+            display: flex;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .github-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+        }
+
+        .github-btn:hover {
+            background: #fff;
+            color: #191970;
+            transform: scale(1.02);
+        }
+
+        .github-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .demo-btn {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            background: #fff;
+            color: #191970;
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+        }
+
+        .demo-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);
+        }
+
+        /* ===== FILTER BUTTONS ===== */
+        .filter-btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            color: #fff;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .filter-btn.active-filter {
+            background: #fff;
+            color: #191970;
+            border-color: #fff;
+        }
+
+        /* ===== PROJECT MODAL ===== */
+        .project-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+        }
+
+        .modal-content-wrapper {
+            max-width: 900px;
+            margin: 4vh auto;
+            background: linear-gradient(135deg, rgba(25, 25, 112, 0.97), rgba(10, 10, 60, 0.97));
+            border-radius: 20px;
+            overflow: hidden;
+            animation: modalSlideUp 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.97);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-header {
+            position: relative;
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .modal-header-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #fff;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            border: none;
+        }
+
+        .modal-close:hover {
+            background: #fff;
+            color: #191970;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-header-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .modal-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0;
+        }
+
+        .modal-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .modal-description {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-features {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-features h3 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.85rem;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .features-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4ade80;
+        }
+
+        .modal-screenshots {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-screenshots h3 {
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .screenshot-thumb {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            border: 2px solid transparent;
+        }
+
+        .screenshot-thumb:hover {
+            transform: scale(1.04);
+            border-color: #fff;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .modal-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .modal-btn-primary {
+            background: #fff;
+            color: #191970;
+        }
+
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.25);
+        }
+
+        .modal-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 16px;
+            animation: lightboxZoom 0.3s ease;
+        }
+
+        @keyframes lightboxZoom {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s ease;
+            border: none;
+        }
+
+        .lightbox-close:hover {
+            background: #fff;
+            color: #191970;
+            transform: scale(1.05);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .project-card {
+                flex-direction: column;
+            }
+            
+            .card-image-container {
+                width: 100%;
+                min-height: 160px;
+            }
+            
+            .modal-content-wrapper {
+                margin: 2vh auto;
+                max-width: 95%;
+            }
+            
+            .screenshots-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 
 <body onload="filterProjects('all')">
@@ -43,124 +557,133 @@
         <p class="section__text__p1">My Apps</p>
         <h1 class="title">My Projects</h1>
 
-        <div class="btn-container filter-btn-container">
+        <div class="filter-btn-container">
             <button class="btn btn-color-2 project-btn filter-btn active-filter"
                 onclick="filterProjects('all')">All</button>
             <button class="btn btn-color-2 project-btn filter-btn" onclick="filterProjects('flutter')">Flutter</button>
             <button class="btn btn-color-2 project-btn filter-btn" onclick="filterProjects('java')">Java</button>
         </div>
 
-        <div class="experience-details-container">
-            <div class="about-containers">
-                <div class="details-container color-container category-flutter"
-                    style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 2rem; padding: 2rem; text-align: left;">
-
-                    <img src="./assets/flux_dashboard.png" alt="Flux App" class="clickable-thumb"
-                        onclick="openModal(this.src)"
-                        style="height: 150px; width: auto; border-radius: 1rem; margin: 0; cursor: zoom-in; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" />
-
-                    <h2 class="experience-sub-title project-title"
-                        style="margin: 0; font-size: 1.8rem; text-align: left;">
-                        Flux - AI-Powered Savings Assistant
-                    </h2>
-
-                    <div class="btn-container" style="margin: 0;">
-                        <button class="btn btn-color-2 project-btn"
-                            onclick="location.href='https://github.com/cagataytpr/flux'">
-                            Github
-                        </button>
+        <div class="projects-list">
+            <!-- FLUX -->
+            <div class="project-card category-flutter" onclick="openProjectModal('flux')">
+                <div class="card-image-container">
+                    <img src="./assets/flux_dashboard.png" alt="Flux App" class="card-image" />
+                    <div class="card-overlay">
+                        <button class="view-btn">View Details</button>
                     </div>
                 </div>
-
-                <div class="details-container color-container category-flutter"
-                    style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 2rem; padding: 2rem; text-align: left;">
-
-                    <img src="./assets/vaulty_full.png" alt="Vaulty" class="clickable-thumb"
-                        onclick="openModal(this.src)"
-                        style="height: 150px; width: auto; border-radius: 1rem; margin: 0; cursor: zoom-in; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" />
-
-                    <h2 class="experience-sub-title project-title"
-                        style="margin: 0; font-size: 1.8rem; text-align: left;">
-                        Vaulty - Secure Password Manager
-                    </h2>
-
-                    <div class="btn-container" style="margin: 0;">
-                        <button class="btn btn-color-2 project-btn"
-                            onclick="location.href='https://github.com/cagataytpr/vaulty'">
-                            Github
-                        </button>
+                <div class="card-content">
+                    <div class="card-header">
+                        <span class="card-badge">Flutter</span>
+                    </div>
+                    <h2 class="card-title">Flux - AI-Driven Personal Finance</h2>
+                    <p class="card-description">A premium fintech experience combining cutting-edge Flutter UI, robust Riverpod state management, and Gemini AI for a smart and witty financial assistant. Features offline-first architecture with Isar database, glassmorphism design, and proactive notifications.</p>
+                    <div class="card-footer">
+                        <div class="card-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Riverpod</span>
+                            <span class="tech-tag">Isar</span>
+                            <span class="tech-tag">Gemini AI</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://github.com/cagataytpr/flux" class="github-btn" onclick="event.stopPropagation()">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                GitHub
+                            </a>
+                        </div>
                     </div>
                 </div>
-
-                <div class="details-container color-container category-flutter"
-                    style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 2rem; padding: 2rem; text-align: left;">
-
-
-
-                    <img src="./assets/ykspuan.png" alt="YKS Score" class="clickable-thumb"
-                        onclick="openModal(this.src)"
-                        style="height: 150px; width: auto; border-radius: 1rem; margin: 0; cursor: zoom-in; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" />
-
-
-
-                    <h2 class="experience-sub-title project-title"
-                        style="margin: 0; font-size: 1.8rem; text-align: left;">
-
-                        YKS Exam Score Calculation
-
-                    </h2>
-
-
-
-                    <div class="btn-container" style="margin: 0;">
-
-                        <button class="btn btn-color-2 project-btn"
-                            onclick="location.href='https://github.com/cagataytpr/yks-exam-score-calculation'">
-
-                            Github
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-                <div class="details-container color-container category-java"
-                    style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 2rem; padding: 2rem; text-align: left;">
-
-                    <img src="./assets/carracegame.png" alt="Car Race Game Java" class="clickable-thumb"
-                        onclick="openModal(this.src)"
-                        style="height: 150px; width: auto; border-radius: 1rem; margin: 0; cursor: zoom-in; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" />
-
-                    <h2 class="experience-sub-title project-title"
-                        style="margin: 0; font-size: 1.8rem; text-align: left;">
-                        Car Race Game Java
-                    </h2>
-
-                    <div class="btn-container" style="margin: 0;">
-                        <button class="btn btn-color-2 project-btn"
-                            onclick="location.href='https://github.com/cagataytpr/CarRaceGAme'">
-                            Github
-                        </button>
-                    </div>
-                </div>
-
-
-                <div class="details-container color-container category-flutter">
-                    <div class="article-container">
-                        <img src="./assets/intro.png" alt="To Do App Flutter" class="project-img" />
-                    </div>
-                    <h2 class="experience-sub-title project-title">To Do App Flutter</h2>
-                    <div class="btn-container">
-                        <button class="btn btn-color-2 project-btn"
-                            onclick="location.href='https://github.com/cagataytpr/To-Do-App'">
-                            Github
-                        </button>
-                    </div>
-                </div>
-
             </div>
-        </div>
+
+            <!-- VAULTY -->
+            <div class="project-card category-flutter" onclick="openProjectModal('vaulty')">
+                <div class="card-image-container">
+                    <img src="./assets/vaulty_full.png" alt="Vaulty" class="card-image" />
+                    <div class="card-overlay">
+                        <button class="view-btn">View Details</button>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <span class="card-badge">Flutter</span>
+                    </div>
+                    <h2 class="card-title">Vaulty - Secure Password Manager</h2>
+                    <p class="card-description">A secure password manager with biometric authentication and AES-256 encryption. Keep all your passwords safe with a modern interface and categorized organization system. Features secure storage, easy search, and quick copy functionality.</p>
+                    <div class="card-footer">
+                        <div class="card-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Sqflite</span>
+                            <span class="tech-tag">Biometrics</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://github.com/cagataytpr/vaulty" class="github-btn" onclick="event.stopPropagation()">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- YKS SCORE -->
+            <div class="project-card category-flutter" onclick="openProjectModal('yks')">
+                <div class="card-image-container">
+                    <img src="./assets/ykspuan.png" alt="YKS Score" class="card-image" />
+                    <div class="card-overlay">
+                        <button class="view-btn">View Details</button>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <span class="card-badge">Flutter</span>
+                    </div>
+                    <h2 class="card-title">YKS Exam Score Calculation</h2>
+                    <p class="card-description">A comprehensive YKS exam score calculator for Turkish university entrance exams. Calculate TYT and AYT scores quickly and accurately. Helps students plan their exam strategies with detailed score breakdowns.</p>
+                    <div class="card-footer">
+                        <div class="card-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Dart</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://github.com/cagataytpr/yks-exam-score-calculation" class="github-btn" onclick="event.stopPropagation()">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CAR RACE GAME -->
+            <div class="project-card category-java" onclick="openProjectModal('carrace')">
+                <div class="card-image-container">
+                    <img src="./assets/carracegame.png" alt="Car Race Game" class="card-image" />
+                    <div class="card-overlay">
+                        <button class="view-btn">View Details</button>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="card-header">
+                        <span class="card-badge">Java</span>
+                    </div>
+                    <h2 class="card-title">Car Race Game</h2>
+                    <p class="card-description">An exciting car racing game built with Java and object-oriented programming principles. Features Swing GUI library for a smooth gaming experience. Built as a university project demonstrating OOP concepts and game development fundamentals.</p>
+                    <div class="card-footer">
+                        <div class="card-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">OOP</span>
+                            <span class="tech-tag">Swing</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://github.com/cagataytpr/CarRaceGAme" class="github-btn" onclick="event.stopPropagation()">
+                                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#contact'" />
     </section>
@@ -178,11 +701,208 @@
             </div>
         </div>
     </section>
-    <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="img01">
+
+    <!-- PROJECT MODAL -->
+    <div id="projectModal" class="project-modal">
+        <div class="modal-content-wrapper">
+            <div class="modal-header">
+                <img id="modalHeaderImage" src="" alt="" class="modal-header-image" />
+                <button class="modal-close" onclick="closeProjectModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-header-content">
+                    <h2 id="modalTitle" class="modal-title"></h2>
+                </div>
+                <span id="modalBadge" class="modal-badge"></span>
+                <p id="modalDescription" class="modal-description"></p>
+                
+                <div class="modal-features">
+                    <h3>Key Features</h3>
+                    <ul id="featuresList" class="features-list"></ul>
+                </div>
+                
+                <div class="modal-screenshots">
+                    <h3>Screenshots</h3>
+                    <div id="screenshotsGrid" class="screenshots-grid"></div>
+                </div>
+                
+                <div class="modal-actions">
+                    <a id="modalGithubBtn" href="" class="modal-btn modal-btn-primary" target="_blank">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        View on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <img id="lightboxImage" src="" alt="" class="lightbox-content" />
+    </div>
+
     <script src="./scripts/script.js"></script>
+    <script>
+        // Project Data - English descriptions from README files
+        const projectsData = {
+            flux: {
+                title: 'Flux - AI-Driven Personal Finance',
+                badge: 'Flutter',
+                description: 'A premium fintech experience designed to transform how you interact with your money. Flux combines cutting-edge Flutter UI, robust Riverpod state management, and the power of Gemini AI to provide a financial assistant that is both smart and witty.',
+                headerImage: './assets/flux_dashboard.png',
+                features: [
+                    'Modern Dashboard with balance overview and spending insights',
+                    'Advanced Analytics with interactive charts',
+                    'Savings Goals with progress tracking',
+                    'Transaction History & Subscription management',
+                    'AI-powered Savings Coach with witty insights',
+                    'Offline-first with Isar local database',
+                    'Proactive Notifications for bill reminders',
+                    'Glassmorphism UI with smooth animations'
+                ],
+                screenshots: [
+                    './assets/flux_dashboard.png',
+                    './assets/flux_goals.png',
+                    './assets/flux_history.png',
+                    './assets/flux_settings.png',
+                    './assets/flux_statistics.png',
+                    './assets/flux_subscriptions.png'
+                ],
+                githubUrl: 'https://github.com/cagataytpr/flux'
+            },
+            vaulty: {
+                title: 'Vaulty - Secure Password Manager',
+                badge: 'Flutter',
+                description: 'A secure password manager with biometric authentication and AES-256 encryption. Keep all your passwords safe with a modern interface and categorized organization system.',
+                headerImage: './assets/vaulty_full.png',
+                features: [
+                    'Biometric authentication (Fingerprint/Face)',
+                    'AES-256 encryption for secure storage',
+                    'Modern and intuitive user interface',
+                    'Categorized password organization',
+                    'Quick copy functionality',
+                    'Easy search across all passwords',
+                    'Password strength indicators',
+                    'Offline-first architecture'
+                ],
+                screenshots: [
+                    './assets/vaulty_full.png',
+                    './assets/vaulty_2.png'
+                ],
+                githubUrl: 'https://github.com/cagataytpr/vaulty'
+            },
+            yks: {
+                title: 'YKS Exam Score Calculation',
+                badge: 'Flutter',
+                description: 'A comprehensive YKS exam score calculator for Turkish university entrance exams. Calculate TYT and AYT scores quickly and accurately.',
+                headerImage: './assets/ykspuan.png',
+                features: [
+                    'TYT score calculation',
+                    'AYT score calculation',
+                    'Detailed score breakdowns',
+                    'Accurate formula implementation',
+                    'Easy to use interface',
+                    'Exam strategy planning',
+                    'Support for all exam types',
+                    'Mobile-friendly design'
+                ],
+                screenshots: [
+                    './assets/ykspuan.png'
+                ],
+                githubUrl: 'https://github.com/cagataytpr/yks-exam-score-calculation'
+            },
+            carrace: {
+                title: 'Car Race Game',
+                badge: 'Java',
+                description: 'An exciting car racing game built with Java and object-oriented programming principles. Features Swing GUI library for a smooth gaming experience.',
+                headerImage: './assets/carracegame.png',
+                features: [
+                    'Object-oriented architecture',
+                    'Swing GUI components',
+                    'Multiple difficulty levels',
+                    'Score tracking system',
+                    'Smooth animations',
+                    'Keyboard controls',
+                    'Game state management',
+                    'Collision detection'
+                ],
+                screenshots: [
+                    './assets/carracegame.png'
+                ],
+                githubUrl: 'https://github.com/cagataytpr/CarRaceGAme'
+            }
+        };
+
+        // Open Project Modal
+        function openProjectModal(projectId) {
+            const project = projectsData[projectId];
+            if (!project) return;
+
+            document.getElementById('modalHeaderImage').src = project.headerImage;
+            document.getElementById('modalBadge').textContent = project.badge;
+            document.getElementById('modalTitle').textContent = project.title;
+            document.getElementById('modalDescription').textContent = project.description;
+            document.getElementById('modalGithubBtn').href = project.githubUrl;
+
+            // Populate features
+            const featuresList = document.getElementById('featuresList');
+            featuresList.innerHTML = '';
+            project.features.forEach(feature => {
+                const li = document.createElement('li');
+                li.textContent = feature;
+                featuresList.appendChild(li);
+            });
+
+            // Populate screenshots
+            const screenshotsGrid = document.getElementById('screenshotsGrid');
+            screenshotsGrid.innerHTML = '';
+            project.screenshots.forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = 'screenshot-thumb';
+                img.onclick = (e) => {
+                    e.stopPropagation();
+                    openLightbox(src);
+                };
+                screenshotsGrid.appendChild(img);
+            });
+
+            document.getElementById('projectModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close Project Modal
+        function closeProjectModal() {
+            document.getElementById('projectModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Lightbox Functions
+        function openLightbox(src) {
+            document.getElementById('lightboxImage').src = src;
+            document.getElementById('lightboxModal').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').style.display = 'none';
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeProjectModal();
+                closeLightbox();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('projectModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeProjectModal();
+            }
+        });
+    </script>
 </body>
 
 </html>
